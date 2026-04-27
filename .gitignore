@@ -1,0 +1,48 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+[Uu]ser[Ss]ettings/
+
+# Unity generated files
+sysinfo.txt
+*.apk
+*.aab
+*.unitypackage
+
+# Addressables / generated player content
+Assets/AddressableAssetsData/*/*.bin*
+Assets/AddressableAssetsData/AddressablesLink/*.xml*
+
+# IDE / editor folders
+.vs/
+.vscode/
+.idea/
+*.sln
+*.csproj
+*.unityproj
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Rider plugin
+Assets/Plugins/Editor/JetBrains*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Crash / profiler outputs
+crashlytics-build.properties
