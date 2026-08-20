@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d80943e3958a46e0a759b1321d761d9, type: 3}
+  m_Name: PlayableCharacterConfig
+  m_EditorClassIdentifier: 
+  Hp: {fileID: 11400000, guid: 724b112239a224f27bcbc9dae12fd9c2, type: 2}
+  Shield: {fileID: 11400000, guid: 8529176b802cc4558aa5576c19888370, type: 2}
+  Mana: {fileID: 11400000, guid: 505810a6babac44eeb589a2e2696ca99, type: 2}
+  Status: {fileID: 11400000, guid: 4f4e2738ee96f4c249fa99a5f2eaa00c, type: 2}
+  HpWidget: {fileID: 4405901252859549196, guid: 450b1a86240da45a1b2669f99a3ee781,
+    type: 3}
+  StatusWidget: {fileID: 1630382039248954355, guid: f201e5fadebd1460c83ac71b25223a2f,
+    type: 3}

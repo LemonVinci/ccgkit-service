@@ -1,0 +1,19 @@
+Single-Player CCG Kit is governed by the Asset Store EULA; however, the following components are governed by the licenses indicated below:
+
+* Fonts (SinglePlayerCCGKit/Fonts folder)
+
+    - SIL OPEN FONT LICENSE Version 1.1
+
+    - License details available here: https://opensource.org/licenses/OFL-1.1
+
+* DOTween asset (needs to be imported by the user before importing Single-Player CCG Kit):
+
+    - Asset Store EULA
+
+    - License details available here: https://unity3d.com/es/legal/as_terms
+
+* Parts of the map generation code (SinglePlayerCCGKit/Scripts/Map) are based on https://github.com/silverua/slay-the-spire-map-in-unity:
+
+    - MIT License
+
+    - License details available here: https://github.com/silverua/slay-the-spire-map-in-unity/blob/master/LICENSE

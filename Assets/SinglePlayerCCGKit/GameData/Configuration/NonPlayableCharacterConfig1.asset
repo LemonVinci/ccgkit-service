@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6da960091c94e1691f75243be8c9b4, type: 3}
+  m_Name: NonPlayableCharacterConfig1
+  m_EditorClassIdentifier: 
+  Hp: {fileID: 11400000, guid: 19768f948d6b24aa4a339f1b27fc59ed, type: 2}
+  Shield: {fileID: 11400000, guid: 1f2745acbbe154be2916da2b5a911b40, type: 2}
+  Status: {fileID: 11400000, guid: db8bb02e3421740d29f279b9334543b6, type: 2}
+  HpWidget: {fileID: 2147987265024763948, guid: b0c70eaebaeab4d639832f20075161cd,
+    type: 3}
+  StatusWidget: {fileID: 2444910369497937939, guid: 98e5cae09b9704f1fa8578431567d2b4,
+    type: 3}
+  IntentWidget: {fileID: 2735626639298023210, guid: afcad6529bd08487687425e4edef2675,
+    type: 3}

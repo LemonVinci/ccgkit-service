@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78989b81b59cc4acda8498b945d63e3c, type: 3}
+  m_Name: Layer1
+  m_EditorClassIdentifier: 
+  Type: 0
+  DistanceFromPreviousLayer:
+    Min: 0
+    Max: 0
+  DistanceBetweenNodes: 2
+  RandomizePosition: 0.4
+  EnemyNodeChance: 1
+  EliteNodeChance: 0
+  RestNodeChance: 0
+  TreasureNodeChance: 0
+  MerchantNodeChance: 0
+  UnknownNodeChance: 0
+  BossNodeChance: 0
+  EnemySets:
+  - {fileID: 11400000, guid: e632a2fb5c31e4a2dbfcb1b59caa6b0d, type: 2}

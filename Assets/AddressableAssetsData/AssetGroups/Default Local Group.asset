@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: b84ea32690b054a64b1cfbfd930b8a6c
+  m_SerializeEntries:
+  - m_GUID: a38da095e6e0d4d799c6cfa500e10b5f
+    m_Address: Wizard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57553809f140040fea4c46fa12b7db04
+    m_Address: Assets/SinglePlayerCCGKit/GameData/Collections/WizardDeck.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7ef9716f3c4bf44dfac487465bc95226
+    m_Address: Assets/SinglePlayerCCGKit/GameData/Collections/WizardRewards.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0f28064a3bdb40c5bda164a623dd985
+    m_Address: Beholder
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9659c406322ca4ecf8ca45c5f331f95f
+    m_Address: Demon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b233966173a5041a797da2fc498c54d0
+    m_Address: Dragon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f1a93afab26164b669ef6ecd602904d6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 60fb0dcda590744468d83b8145c231f7, type: 2}
+    - {fileID: 11400000, guid: b980655027c2b4ab4a6ee26256ffcdfd, type: 2}
