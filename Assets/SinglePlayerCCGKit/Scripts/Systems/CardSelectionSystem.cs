@@ -24,11 +24,26 @@ namespace CCGKit
 
         protected GameObject SelectedCard;
 
+        protected ComboBattleSystem ComboBattleSystem;
+
         protected virtual void Start()
         {
             CardLayer = 1 << LayerMask.NameToLayer("Card");
             TargetLayer = 1 << LayerMask.NameToLayer("Enemy");
             MainCamera = Camera.main;
+            ComboBattleSystem = FindFirstObjectByType<ComboBattleSystem>();
+        }
+
+        /// <summary>
+        /// Whether the card has to be aimed with the targeting arrow. In the kitchen modes every
+        /// ingredient is aimed at a dish station; in ComboGame only damage cards pick a monster.
+        /// </summary>
+        protected bool CardNeedsTarget(CardTemplate card)
+        {
+            if (ComboBattleSystem != null)
+                return ComboBattleSystem.CardNeedsTarget(card);
+
+            return CardUtils.CardHasTargetableEffect(card);
         }
 
         protected virtual void PlaySelectedCard()
@@ -37,6 +52,15 @@ namespace CCGKit
             cardObject.SetInteractable(false);
             HandPresentationSystem.RearrangeHand(SelectedCard);
             HandPresentationSystem.RemoveCardFromHand(SelectedCard);
+
+            // In the trick-taking prototype the card stays on the table until the trick is resolved.
+            var trickTaking = FindFirstObjectByType<TrickTakingSystem>();
+            if (trickTaking != null)
+            {
+                trickTaking.OnPlayerCardPlayed(SelectedCard);
+                return;
+            }
+
             HandPresentationSystem.MoveCardToDiscardPile(SelectedCard);
 
             DeckDrawingSystem.MoveCardToDiscardPile(cardObject.RuntimeCard);

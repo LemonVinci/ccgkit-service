@@ -17,11 +17,16 @@ namespace CCGKit
 #pragma warning disable 649
         [SerializeField]
         private Canvas cardPileCanvas;
+
+        [Tooltip("Enable in game modes where every card is played by dropping it on the play zone.")]
+        [SerializeField]
+        private bool playAnyCard;
 #pragma warning restore 649
 
         public CardWithArrowSelectionSystem CardWithArrowSelectionSystem;
 
         private BoxCollider2D cardArea;
+        private TrickTakingSystem trickTakingSystem;
 
         private Vector3 originalCardPos;
         private Quaternion originalCardRot;
@@ -40,6 +45,7 @@ namespace CCGKit
             var go = GameObject.Find("CardArea");
             if (go != null)
                 cardArea = go.GetComponent<BoxCollider2D>();
+            trickTakingSystem = FindFirstObjectByType<TrickTakingSystem>();
         }
         
         private void Update()
@@ -48,6 +54,10 @@ namespace CCGKit
                 return;
 
             if (TurnManagementSystem.IsEndOfGame())
+                return;
+
+            // While the bot answers or the trick result is on screen the hand must stay locked.
+            if (trickTakingSystem != null && !trickTakingSystem.IsWaitingForPlayerCard && SelectedCard == null)
                 return;
 
             if (HandPresentationSystem.IsAnimating())
@@ -85,7 +95,7 @@ namespace CCGKit
                 var card = hitInfo.collider.GetComponent<CardObject>();
                 var cardTemplate = card.Template;
                 if (CardUtils.CardCanBePlayed(cardTemplate, PlayerMana) &&
-                    !CardUtils.CardHasTargetableEffect(cardTemplate))
+                    (playAnyCard || !CardNeedsTarget(cardTemplate)))
                 {
                     SelectedCard = hitInfo.collider.gameObject;
                     originalCardPos = SelectedCard.transform.position;
@@ -161,7 +171,12 @@ namespace CCGKit
 
         protected override void PlaySelectedCard()
         {
+            var template = SelectedCard.GetComponent<CardObject>().Template;
+
             base.PlaySelectedCard();
+
+            if (ComboBattleSystem != null)
+                ComboBattleSystem.ResolvePlayedCard(template, null);
         }
     }
 }

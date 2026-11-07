@@ -5,6 +5,7 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace CCGKit
@@ -57,6 +58,18 @@ namespace CCGKit
             descriptionText.text = string.Empty;
         }
 
+        public void SetDefeatText(string description = null)
+        {
+            titleText.text = DefeatText;
+            descriptionText.text = description ?? string.Empty;
+        }
+
+        public void HideRewardButton()
+        {
+            if (rewardButton != null)
+                Destroy(rewardButton.gameObject);
+        }
+
         public void SetDefeatHeat()
         {
             ApplyDefeatChrome();
@@ -84,7 +97,17 @@ namespace CCGKit
 
         public void OnContinueButtonPressed()
         {
-            Transition.LoadLevel("Map", 0.5f, Color.black);
+            if (SceneManager.GetActiveScene().name == "ComboGame")
+            {
+                Transition.LoadLevel("ComboGame", 0.5f, Color.black);
+                return;
+            }
+
+            var gameInfo = FindFirstObjectByType<GameInfo>();
+            var mapScene = gameInfo != null && !string.IsNullOrEmpty(gameInfo.MapSceneName)
+                ? gameInfo.MapSceneName
+                : "Map";
+            Transition.LoadLevel(mapScene, 0.5f, Color.black);
         }
 
         public void OnCardRewardButtonPressed()

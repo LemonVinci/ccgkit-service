@@ -296,6 +296,11 @@ namespace CCGKit
                 gameInfo = go.AddComponent<GameInfo>();
             }
 
+            gameInfo.ContextId = PlayContext.Kitchen;
+            gameInfo.MapPrefKey = PlayContext.KitchenMapPref;
+            gameInfo.SavePrefKey = PlayContext.KitchenSavePref;
+            gameInfo.MapSceneName = "Map";
+
             var pool = GetPoolList();
             _settings.DishPool = pool;
             _settings.IsActive = true;

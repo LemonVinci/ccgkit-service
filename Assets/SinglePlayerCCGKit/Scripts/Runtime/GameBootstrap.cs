@@ -58,7 +58,7 @@ namespace CCGKit
         private List<CardTemplate> playerDeck = new List<CardTemplate>();
         private GameObject player;
         private GameInfo gameInfo;
-        private readonly string saveDataPrefKey = "save";
+        private string saveDataPrefKey = PlayContext.KitchenSavePref;
         private int numAssetsToLoad;
         private int numAssetsLoaded;
 
@@ -73,6 +73,8 @@ namespace CCGKit
                 numAssetsToLoad = 1;
 
                 gameInfo = FindFirstObjectByType<GameInfo>();
+                if (gameInfo != null)
+                    saveDataPrefKey = gameInfo.SavePrefKey;
                 if (gameInfo != null)
                 {
                     var dish = gameInfo.Encounter != null ? gameInfo.Encounter.Dish : null;
@@ -118,6 +120,8 @@ namespace CCGKit
                 manaResetSystem.SetDefaultMana(template.Mana);
 
                 var sessionInfo = FindFirstObjectByType<GameInfo>();
+                if (sessionInfo != null && !string.IsNullOrEmpty(sessionInfo.SavePrefKey))
+                    saveDataPrefKey = sessionInfo.SavePrefKey;
                 var useStartingDeck = sessionInfo != null && sessionInfo.UseStartingDeck;
                 if (sessionInfo != null)
                     sessionInfo.UseStartingDeck = false;
@@ -280,6 +284,10 @@ namespace CCGKit
             var noEnemies = new List<CharacterObject>(0);
             cardWithArrowSelectionSystem.Initialize(playerCharacter, noEnemies);
             turnManagementSystem.BeginGame();
+
+            var trickTaking = FindFirstObjectByType<TrickTakingSystem>();
+            if (trickTaking != null)
+                trickTaking.Initialize(playerDeck, deckDrawingSystem, handPresentationSystem, cardPool);
         }
     }
 }

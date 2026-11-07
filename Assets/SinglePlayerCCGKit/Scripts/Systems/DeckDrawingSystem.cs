@@ -65,6 +65,12 @@ namespace CCGKit
             return discardPile;
         }
 
+        public int GetHandCount()
+        {
+            EnsureDeckLists();
+            return hand.Count;
+        }
+
         public int LoadDeck(List<CardTemplate> playerDeck)
         {
             EnsureDeckLists();
