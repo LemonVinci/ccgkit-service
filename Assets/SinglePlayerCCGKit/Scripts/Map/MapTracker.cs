@@ -28,6 +28,9 @@ namespace CCGKit
         private EncounterList eliteEnemies;
         [SerializeField]
         private EncounterList bosses;
+
+        [SerializeField]
+        private string gameSceneName = "Game";
 #pragma warning restore 649
 
         private Map map;
@@ -95,18 +98,14 @@ namespace CCGKit
 
         private void TravelToNode(NodeView mapNode)
         {
-            var gameInfo = FindFirstObjectByType<GameInfo>();
-            if (gameInfo == null)
-            {
-                var go = new GameObject("GameInfo");
-                gameInfo = go.AddComponent<GameInfo>();
-            }
+            var gameInfo = mapScreen != null ? mapScreen.EnsureSession() : GameInfo.EnsureSession(
+                PlayContext.Kitchen, PlayContext.KitchenMapPref, PlayContext.KitchenSavePref, "Map");
             gameInfo.Encounter = mapNode.Node.Encounter;
             gameInfo.PlayerCoordinate = mapNode.Node.Coordinate;
             if (gameInfo.BattleTest != null)
                 gameInfo.BattleTest.IsActive = false;
 
-            Transition.LoadLevel("Game", 0.5f, Color.black);
+            Transition.LoadLevel(gameSceneName, 0.5f, Color.black);
         }
     }
 }

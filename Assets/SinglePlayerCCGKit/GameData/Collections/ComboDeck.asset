@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e31e688086974d25bb4daf05c561641, type: 3}
+  m_Name: ComboDeck
+  m_EditorClassIdentifier: 
+  Name: Combo deck
+  Entries:
+  - Card: {fileID: 11400000, guid: c0b0a1b2c3d4e5f60718293a4b5c6d01, type: 2}
+    NumCopies: 6
+  - Card: {fileID: 11400000, guid: c0b0a1b2c3d4e5f60718293a4b5c6d02, type: 2}
+    NumCopies: 4
+  - Card: {fileID: 11400000, guid: c0b0a1b2c3d4e5f60718293a4b5c6d03, type: 2}
+    NumCopies: 3
+  - Card: {fileID: 11400000, guid: c0b0a1b2c3d4e5f60718293a4b5c6d04, type: 2}
+    NumCopies: 3

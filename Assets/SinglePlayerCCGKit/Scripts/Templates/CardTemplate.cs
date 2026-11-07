@@ -24,6 +24,8 @@ namespace CCGKit
         public string Name;
         public IngredientSuit Suit;
         public int Value;
+        [TextArea]
+        public string Description;
         public Material Material;
         public Sprite Picture;
 

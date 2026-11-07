@@ -8,6 +8,11 @@ namespace CCGKit
 {
     public class GameInfo : MonoBehaviour
     {
+        public string ContextId = PlayContext.Kitchen;
+        public string MapPrefKey = PlayContext.KitchenMapPref;
+        public string SavePrefKey = PlayContext.KitchenSavePref;
+        public string MapSceneName = "Map";
+
         public Coordinate PlayerCoordinate;
         
         public EncounterListEntry Encounter;
@@ -25,6 +30,26 @@ namespace CCGKit
         private void Awake()
         {
             DontDestroyOnLoad(gameObject);
+        }
+
+        public static GameInfo EnsureSession(string contextId, string mapPrefKey, string savePrefKey, string mapSceneName)
+        {
+            var existing = FindFirstObjectByType<GameInfo>();
+            if (existing != null && existing.ContextId != contextId)
+                Destroy(existing.gameObject);
+
+            existing = FindFirstObjectByType<GameInfo>();
+            if (existing == null)
+            {
+                var go = new GameObject("GameInfo");
+                existing = go.AddComponent<GameInfo>();
+            }
+
+            existing.ContextId = contextId;
+            existing.MapPrefKey = mapPrefKey;
+            existing.SavePrefKey = savePrefKey;
+            existing.MapSceneName = mapSceneName;
+            return existing;
         }
     }
 }

@@ -8,18 +8,34 @@ using UnityEngine.Rendering;
 
 namespace CCGKit
 {
+    public enum ArrowTargetKind
+    {
+        DishStation,
+        Enemy
+    }
+
     /// <summary>
-    /// Creates a targeting arrow when the player selects an ingredient card, then plays it on the chosen dish station.
+    /// Creates a targeting arrow when the player selects a card, then plays it on the aimed target:
+    /// a dish station in the kitchen modes, or a monster in ComboGame.
     /// </summary>
     public class CardWithArrowSelectionSystem : CardSelectionSystem
     {
 #pragma warning disable 649
         [SerializeField]
         private Canvas cardPileCanvas;
+
+        [Tooltip("Disable in game modes where cards are dropped on a play zone instead of aimed at a target.")]
+        [SerializeField]
+        private bool arrowEnabled = true;
+
+        [Tooltip("What the arrow can be dropped on. Enemy is used by ComboGame.")]
+        [SerializeField]
+        private ArrowTargetKind targetKind = ArrowTargetKind.DishStation;
 #pragma warning restore 649
 
         private TargetingArrow targetingArrow;
         private DishTarget highlightedDishTarget;
+        private GameObject selectedEnemy;
         private Vector3 prevClickPos;
         private bool isArrowCreated;
 
@@ -37,6 +53,9 @@ namespace CCGKit
 
         private void Update()
         {
+            if (!arrowEnabled)
+                return;
+
             if (cardPileCanvas.isActiveAndEnabled)
                 return;
 
@@ -49,11 +68,11 @@ namespace CCGKit
             if (Input.GetMouseButtonDown(0))
             {
                 DetectCardSelection();
-                DetectDishTargetSelection();
+                DetectTargetSelection();
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                DetectDishTargetSelection();
+                DetectTargetSelection();
             }
             else if (Input.GetMouseButtonDown(1))
             {
@@ -76,8 +95,7 @@ namespace CCGKit
                 return;
 
             var cardTemplate = card.Template;
-            if (!CardUtils.CardCanBePlayed(cardTemplate, PlayerMana) ||
-                !CardUtils.CardHasTargetableEffect(cardTemplate))
+            if (!CardUtils.CardCanBePlayed(cardTemplate, PlayerMana) || !CardNeedsTarget(cardTemplate))
                 return;
 
             SelectedCard = hitInfo.collider.gameObject;
@@ -102,7 +120,7 @@ namespace CCGKit
                 targetingArrow.EnableArrow(false);
         }
 
-        private void DetectDishTargetSelection()
+        private void DetectTargetSelection()
         {
             if (SelectedCard == null)
                 return;
@@ -111,6 +129,12 @@ namespace CCGKit
             var hitInfo = Physics2D.Raycast(mousePos, Vector3.forward, Mathf.Infinity, TargetLayer);
             if (hitInfo.collider == null)
                 return;
+
+            if (targetKind == ArrowTargetKind.Enemy)
+            {
+                DetectEnemySelection(hitInfo.collider.gameObject);
+                return;
+            }
 
             var dishTarget = hitInfo.collider.GetComponent<DishTarget>();
             if (dishTarget == null)
@@ -124,10 +148,26 @@ namespace CCGKit
             }
 
             PlaySelectedCard();
+            ClearSelection();
+        }
 
+        private void DetectEnemySelection(GameObject hitObject)
+        {
+            var enemy = hitObject.GetComponent<CharacterObject>();
+            if (enemy == null || enemy.IsDead)
+                return;
+
+            selectedEnemy = hitObject;
+            PlaySelectedCard();
+            ClearSelection();
+        }
+
+        private void ClearSelection()
+        {
             SelectedCard = null;
             isArrowCreated = false;
             highlightedDishTarget = null;
+            selectedEnemy = null;
             if (targetingArrow != null)
                 targetingArrow.EnableArrow(false);
         }
@@ -189,12 +229,22 @@ namespace CCGKit
 
         protected override void PlaySelectedCard()
         {
+            var template = SelectedCard.GetComponent<CardObject>().Template;
+
             base.PlaySelectedCard();
+
+            if (ComboBattleSystem != null)
+                ComboBattleSystem.ResolvePlayedCard(template, selectedEnemy);
         }
 
         public bool IsArrowActive()
         {
             return isArrowCreated;
+        }
+
+        public GameObject GetSelectedEnemy()
+        {
+            return selectedEnemy;
         }
     }
 }

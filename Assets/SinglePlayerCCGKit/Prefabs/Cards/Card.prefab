@@ -685,6 +685,10 @@ MonoBehaviour:
   glow: {fileID: 4052160518242966943}
   inHandColor: {r: 0.039215688, g: 0.6392157, b: 0.94509804, a: 1}
   aboutToBePlayedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  saltyFrame: {fileID: 21300000, guid: 52a697883a69443f9b29f737abaecb8d, type: 3}
+  bitterFrame: {fileID: 21300000, guid: f503ad68e3d354b81930b338bd1fe210, type: 3}
+  sweetFrame: {fileID: 21300000, guid: 2167aee18f2224578a0318015edd9fb7, type: 3}
+  sourFrame: {fileID: 21300000, guid: e2b78d2fe5dcb4955931f4e60683e9df, type: 3}
   Template: {fileID: 0}
 --- !u!114 &-3504286006441947994
 MonoBehaviour:

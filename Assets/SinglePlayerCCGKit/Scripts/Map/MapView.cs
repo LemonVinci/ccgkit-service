@@ -57,8 +57,20 @@ namespace CCGKit
             mainCamera = Camera.main;
         }
 
+        public void ClearMap()
+        {
+            MapNodes.Clear();
+            lineConnections.Clear();
+            if (firstParent != null)
+                Destroy(firstParent);
+            firstParent = null;
+            mapParent = null;
+            map = null;
+        }
+
         public void ShowMap(Map map)
         {
+            ClearMap();
             this.map = map;
             CreateMapParent();
             CreateNodes(map.Nodes);
